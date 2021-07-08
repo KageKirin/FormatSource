@@ -5,4 +5,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="editorconfig" Version="0.12.2" />
+  </ItemGroup>
+
 </Project>
