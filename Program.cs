@@ -1,5 +1,6 @@
 ﻿using System;
 using System.CommandLine.DragonFruit;
+using EditorConfig.Core;
 
 namespace formatsource
 {
@@ -14,6 +15,10 @@ namespace formatsource
         /// <param name="args">input files</param>
         public static void Main(string config = ".editorconfig", bool inplace = false, bool verbose = false, string[] args = null)
         {
+            var parser = new EditorConfigParser(
+                configFileName: config
+            );
+
             if (verbose)
             {
                 Console.WriteLine("Running in verbose mode");
@@ -21,6 +26,12 @@ namespace formatsource
             Console.WriteLine($"inplace: {inplace}, config: {config}");
             foreach (var i in args)
             {
+                var configuration = parser.Parse(fileName: i);
+                foreach (var kv in configuration.Properties)
+                {
+                    Console.WriteLine("{0}={1}", kv.Key, kv.Value);
+                }
+
                 Console.WriteLine($"{i}");
             }
         }
